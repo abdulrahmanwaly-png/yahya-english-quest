@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#4F46E5">
+  <title>Yahya's English Adventure — Year 1 Exam Quest</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%234F46E5'/%3E%3Ccircle cx='22' cy='27' r='8' fill='%23FFF'/%3E%3Ccircle cx='42' cy='27' r='8' fill='%23FFF'/%3E%3Ccircle cx='23' cy='27' r='4' fill='%231E293B'/%3E%3Ccircle cx='41' cy='27' r='4' fill='%231E293B'/%3E%3Cpolygon points='32,33 27,40 37,40' fill='%23F59E0B'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800&family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link visually-hidden">Skip to main content</a>
+
+  <div class="app-shell">
+    <!-- Top Sticky HUD -->
+    <header class="hud">
+      <div class="hud-inner">
+        <div class="hud-brand">
+          <button type="button" id="btn-brand-home" class="brand-btn" aria-label="Go to Adventure Map">
+            <span aria-hidden="true">🦉</span>
+            <span class="brand-title">Yahya's Quest</span>
+          </button>
+        </div>
+
+        <div class="hud-stats" aria-label="Progress stats">
+          <span class="stat-pill stat-pill--stars" title="Total Stars">
+            <span aria-hidden="true">⭐</span>
+            <span id="hud-stars">0</span>
+          </span>
+          <span class="stat-pill stat-pill--streak" title="Best Streak">
+            <span aria-hidden="true">🔥</span>
+            <span id="hud-streak">0</span>
+          </span>
+          <button type="button" id="btn-hud-mistakes" class="stat-pill stat-pill--mistakes" aria-label="Practice mistakes">
+            <span aria-hidden="true">🎯</span>
+            <span id="hud-mistakes">0</span>
+          </button>
+        </div>
+
+        <div class="hud-actions">
+          <button type="button" id="btn-toggle-ar" class="icon-btn" aria-pressed="true" aria-label="Toggle Arabic encouragement" title="عربي / EN">
+            ع
+          </button>
+          <button type="button" id="btn-toggle-sound" class="icon-btn" aria-pressed="true" aria-label="Toggle sound effects" title="Sound On/Off">
+            🔊
+          </button>
+          <button type="button" id="btn-open-trophies" class="icon-btn" aria-label="Open Trophy Room" title="Trophies">
+            🏆
+          </button>
+          <button type="button" id="btn-open-report" class="icon-btn" aria-label="Open Parent Progress Report" title="Progress Report">
+            📊
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Game Stage -->
+    <main id="main-content" class="main-stage" tabindex="-1">
+      <!-- VIEW 1: Home Adventure Map -->
+      <section id="view-home" class="view" aria-labelledby="home-title">
+        <div class="hero-card">
+          <div class="mascot-wrap" id="home-mascot-wrap"></div>
+          <div class="hero-copy">
+            <span class="rank-badge" id="home-rank-badge">🌱 Word Explorer</span>
+            <h1 id="home-title" class="hero-greeting">Hi Yahya! Ready to Play?</h1>
+            <p class="hero-sub">Every question from your Year 1 English exam sheets — turned into a fun adventure!</p>
+            <p class="ar-text" lang="ar" dir="rtl" id="home-ar-sub">أهلاً يا بطل! اختار مغامرة واجمع النجوم والكؤوس قبل الامتحان.</p>
+            <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="home-progress-track">
+              <div class="progress-fill" id="home-progress-fill" style="width: 0%"></div>
+            </div>
+            <div class="progress-meta">
+              <span id="home-mastered-text">0 / 0 Questions Mastered</span>
+              <span id="home-pct-text">0%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Play & Mistake Rescue Modes -->
+        <div class="quick-modes" aria-label="Quick Game Modes">
+          <button type="button" id="btn-mode-mistakes" class="mode-card mode-card--mistakes">
+            <span class="mode-badge" id="mode-mistakes-badge">0 To Fix</span>
+            <h3>🎯 Fix My Mistakes</h3>
+            <p>Repeat only the questions you missed until you master them!</p>
+            <small class="ar-text" lang="ar" dir="rtl">كرّر الأسئلة اللي غلطت فيها بس لحد ما تتقنها ١٠٠٪</small>
+          </button>
+
+          <button type="button" id="btn-mode-mix" class="mode-card mode-card--mix">
+            <span class="mode-badge">10 Qs</span>
+            <h3>⚡ Quick Warm-Up</h3>
+            <p>10 fun mixed questions from all 4 exam worlds!</p>
+            <small class="ar-text" lang="ar" dir="rtl">١٠ أسئلة سريعة ومتنوعة من المنهج كله</small>
+          </button>
+
+          <button type="button" id="btn-mode-exam" class="mode-card mode-card--exam">
+            <span class="mode-badge">20 Qs</span>
+            <h3>🏆 Mini Mock Exam</h3>
+            <p>A 20-question Term 1 challenge with stars &amp; score card!</p>
+            <small class="ar-text" lang="ar" dir="rtl">اختبار تجريبي ٢٠ سؤال بدرجة كاملة في الآخر</small>
+          </button>
+        </div>
+
+        <!-- 4 Exam Worlds -->
+        <div class="section-heading">
+          <h2>Choose Your Exam World</h2>
+          <span class="ar-text" lang="ar" dir="rtl">اختار عالم المذاكرة (حسب منهج الترم الأول)</span>
+        </div>
+        <div class="worlds-wrap">
+          <div id="worlds-grid" class="worlds-grid"></div>
+        </div>
+      </section>
+
+      <!-- VIEW 2: World Quests List -->
+      <section id="view-world" class="view" hidden aria-labelledby="world-title-h1">
+        <div id="world-header" class="world-header"></div>
+        <div id="quests-grid" class="quests-grid"></div>
+      </section>
+
+      <!-- VIEW 3: Active Quiz Arena -->
+      <section id="view-quiz" class="view" hidden aria-labelledby="quiz-quest-title">
+        <div class="quiz-topbar">
+          <button type="button" id="btn-quiz-exit" class="btn-back" aria-label="Exit quiz">← Map</button>
+          <div class="quiz-meta">
+            <h1 id="quiz-quest-title" class="visually-hidden">Quiz</h1>
+            <div class="quiz-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="quiz-progress-bar">
+              <div class="progress-fill" id="quiz-progress-fill" style="width: 0%"></div>
+            </div>
+            <span id="quiz-counter" class="quiz-counter">1 / 10</span>
+          </div>
+          <span id="quiz-streak-chip" class="streak-chip" aria-live="off">🔥 0</span>
+        </div>
+
+        <div id="retry-banner" class="retry-banner" hidden>
+          <span>🔄 Mistake Rescue Round — Let's master the tricky ones!</span>
+          <span class="ar-text" lang="ar" dir="rtl">جولة تصحيح الأخطاء — يلا نكسبهم المرة دي!</span>
+        </div>
+
+        <div id="quiz-layout" class="quiz-layout">
+          <aside id="context-panel" class="context-panel" hidden aria-label="Story or Reference"></aside>
+          <div id="question-card" class="question-card"></div>
+        </div>
+      </section>
+
+      <!-- VIEW 4: Round Summary & Repeat Mistakes -->
+      <section id="view-summary" class="view" hidden aria-labelledby="summary-heading">
+        <div id="summary-card" class="summary-card"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Native Modal Dialog: Parent Progress Report -->
+  <dialog id="report-dialog" class="game-dialog" closedby="any" aria-labelledby="report-dialog-title">
+    <div class="dialog-head">
+      <div>
+        <h2 id="report-dialog-title">Progress &amp; Mistakes Report</h2>
+        <p class="ar-text" lang="ar" dir="rtl">تقرير درجات يحيى والأخطاء المطلوب مراجعتها</p>
+      </div>
+      <form method="dialog">
+        <button type="submit" class="dialog-close" aria-label="Close report" autofocus>✕</button>
+      </form>
+    </div>
+    <div id="report-dialog-body" class="dialog-body"></div>
+  </dialog>
+
+  <!-- Native Modal Dialog: Trophy Room -->
+  <dialog id="trophies-dialog" class="game-dialog" closedby="any" aria-labelledby="trophies-dialog-title">
+    <div class="dialog-head">
+      <div>
+        <h2 id="trophies-dialog-title">🏆 Yahya's Trophy Shelf</h2>
+        <p class="ar-text" lang="ar" dir="rtl">جوائز وأوسمة يحيى</p>
+      </div>
+      <form method="dialog">
+        <button type="submit" class="dialog-close" aria-label="Close trophy room" autofocus>✕</button>
+      </form>
+    </div>
+    <div id="trophies-dialog-body" class="dialog-body"></div>
+  </dialog>
+
+  <!-- Centralized Polite Screen-Reader Live Announcer -->
+  <div id="sr-announcer" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
